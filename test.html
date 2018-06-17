@@ -1,0 +1,70 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>wendy test</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <!-- 注意：vue-resource 依赖于 Vue，所以先后顺序要注意  vue-resource在vue实例上挂了一个this.$http -->
+    <!-- this.$http.jsonp -->
+    <script src="./lib/vue-resource-1.3.4.js"></script>
+    <script src="./lib/vue-router-3.0.1.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/"></router-link>
+        <router-link to="/account/login"></router-link>
+        <router-link to="/account/register"></router-link>
+
+        <router-view></router-view>
+        <router-view name="left"></router-view>
+        <router-view name="main"></router-view>
+    </div>
+    <script>
+        var header = {
+            template:'<h1 class="header">头部</h1>'
+        };
+        var leftBox = {
+            template:'<h1 >zuobian</h1>'
+        };
+        var mainBox = {
+            template:'<h1>main</h1>'
+        };
+
+        var router = new VueRouter({
+            routes:[
+                {
+                    path:'/', 
+                    components:{
+                        default:header,
+                        left:leftBox,
+                        main:mainBox
+                    }
+                },
+                {
+                    path:'/left', 
+                    component:leftBox
+                },
+                {
+                    path:'/main', 
+                    component:mainBox
+                },
+            ]
+        })
+
+        // 创建 Vue 实例，得到 ViewModel
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+                
+
+            },
+            router
+        });
+    </script>
+</body>
+
+</html>
